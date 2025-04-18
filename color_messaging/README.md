@@ -1,0 +1,5 @@
+# Információs Rendszerek Integrálása féléves feladat
+
+## Féléves feladat sorszáma: 2
+
+Készítsen egy alkalmazást, amely 3 kliensből áll. Az első kliens a '/queue/colorQueue' üzenetsorra pont-pont csatlakozással véletlenszerűen RED, GREEN és BLUE paraméterrel ellátott üzeneteket küld 1 másodpercenként. Készítsen három MDB-t amelyek filterrel a 'RED', 'GREEN' és a 'BLUE' paraméterrel ellátott üzeneteket kapják kizárólag. Az MDB-k véletlenszerűen átlagosan 10 ből 3 szor, rollback-elik az üzenetet, ami így a halott levél csatornára kerül. Minden 10 sikeresen megkapott (nem rollback-elt) üzenet után az MDB-k a '/queue/colorStatistics' sorra küldenek egy üzenetet, ami azt jelzi, hogy 10 (adott színű) üzenetet feldolgoztak. Készítsen egy második klienst, ami a '/queue/colorStatistics' sorrol olvassa a statisztikát és a konzolba kiírja hogy pl. '10 'RED' messages has been processed'. A harmadik kliens a '/queue/DLQ' halott levél csatornáról a konzolon jelzi, ha egy üzenetet nem dolgoztak fel.
