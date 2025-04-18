@@ -5,7 +5,7 @@ import time
 connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
 channel = connection.channel()
 
-channel.exchange_declare(exchange='colorExchange', exchange_type='direct')
+channel.exchange_declare(exchange='colorExchange', exchange_type='direct', durable=True)
 
 colors = ['RED', 'GREEN', 'BLUE']
 

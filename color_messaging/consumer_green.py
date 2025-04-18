@@ -20,12 +20,13 @@ callback.processed = 0
 connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
 channel = connection.channel()
 
-channel.exchange_declare(exchange='colorExchange', exchange_type='direct')
-channel.queue_declare(queue='GREEN')
+channel.exchange_declare(exchange='colorExchange', exchange_type='direct', durable=True)
+
+channel.queue_declare(queue='GREEN', durable=True)
 channel.queue_bind(exchange='colorExchange', queue='GREEN', routing_key='GREEN')
 
-channel.queue_declare(queue='colorStatistics')
-channel.queue_declare(queue='DLQ')
+channel.queue_declare(queue='colorStatistics', durable=True)
+channel.queue_declare(queue='DLQ', durable=True)
 
 channel.basic_consume(queue='GREEN', on_message_callback=callback, auto_ack=True)
 
