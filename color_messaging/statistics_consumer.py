@@ -6,7 +6,7 @@ def callback(ch, method, properties, body):
 connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
 channel = connection.channel()
 
-channel.queue_declare(queue='colorStatistics')
+channel.queue_declare(queue='colorStatistics', durable=True)
 channel.basic_consume(queue='colorStatistics', on_message_callback=callback, auto_ack=True)
 
 print('Waiting for stats...')
