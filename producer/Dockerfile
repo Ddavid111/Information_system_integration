@@ -4,6 +4,6 @@ WORKDIR /app
 
 COPY app.py .
 
-RUN pip install --no-cache-dir pika
+RUN pip install --no-cache-dir requirements.txt
 
 CMD ["python", "app.py"]
