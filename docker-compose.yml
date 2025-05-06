@@ -8,3 +8,22 @@ services:
     environment:
       RABBITMQ_DEFAULT_USER: guest
       RABBITMQ_DEFAULT_PASS: guest
+  producer:
+    build: ./producer
+    depends_on:
+      - rabbitmq
+
+  consumer:
+    build: ./consumer
+    depends_on:
+      - rabbitmq
+
+  statistics:
+    build: ./stats_listener
+    depends_on:
+      - rabbitmq
+
+  dlq:
+    build: ./dlq_listener
+    depends_on:
+      - rabbitmq

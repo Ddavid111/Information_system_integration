@@ -2,7 +2,16 @@ import pika
 import random
 import time
 
-connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
+def wait_for_rabbitmq():
+    while True:
+        try:
+            connection = pika.BlockingConnection(pika.ConnectionParameters('rabbitmq'))
+            return connection
+        except pika.exceptions.AMQPConnectionError:
+            print("RabbitMQ not ready, waiting...")
+            time.sleep(2)
+
+connection = wait_for_rabbitmq()
 channel = connection.channel()
 
 channel.exchange_declare(exchange='colorExchange', exchange_type='direct', durable=True)
